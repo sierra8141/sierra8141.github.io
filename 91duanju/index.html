@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>91短剧网页版-短剧在线观看_免费短剧网页版入口</title>
+<meta name="description" content="91短剧网页版首页，提供短剧在线观看入口与剧集分类浏览，免登录直接在浏览器中追短剧，覆盖都市、逆袭、甜宠、悬疑等热门类型，并整理观看入口与使用说明。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111a2b'/%3E%3Cpath d='M24 18l24 14-24 14z' fill='%23ffb02e'/%3E%3Crect x='14' y='46' width='36' height='5' rx='2.5' fill='%2340e0d0'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#111a2b;
+  --ink-2:#1b2740;
+  --paper:#f6f4ef;
+  --card:#ffffff;
+  --gold:#ffb02e;
+  --teal:#17b8a6;
+  --rose:#e8506b;
+  --muted:#5f6779;
+  --line:#e3dfd6;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(17,26,43,.09);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;max-width:100%;}
+h1,h2,h3{line-height:1.3;margin:0;}
+p{margin:0 0 14px;}
+.wrap{width:min(1140px,92vw);margin:0 auto;}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(17,26,43,.96);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.header-inner{
+  display:flex;align-items:center;gap:26px;
+  min-height:66px;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.brand-mark{width:34px;height:34px;}
+.brand-text{
+  color:#fff;font-weight:800;font-size:1.06rem;letter-spacing:.01em;white-space:nowrap;
+}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+.nav a{
+  color:#cfd6e4;font-size:.92rem;padding:8px 13px;border-radius:9px;
+  transition:.2s;
+}
+.nav a:hover,.nav a:focus-visible{background:rgba(255,255,255,.1);color:#fff;}
+.nav a.cta{
+  background:var(--gold);color:#241a05;font-weight:700;
+}
+.nav a.cta:hover{background:#ffc457;}
+
+/* ---------- hero ---------- */
+.hero{
+  background:
+    radial-gradient(900px 420px at 82% -10%,rgba(23,184,166,.28),transparent 62%),
+    radial-gradient(700px 400px at 8% 110%,rgba(232,80,107,.22),transparent 66%),
+    linear-gradient(160deg,#111a2b 0%,#182642 60%,#101828 100%);
+  color:#fff;
+  padding:56px 0 60px;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,176,46,.14);
+  border:1px solid rgba(255,176,46,.42);
+  color:#ffd68a;font-size:.8rem;font-weight:600;
+  padding:5px 13px;border-radius:999px;margin-bottom:18px;
+}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);}
+h1{
+  font-size:clamp(1.85rem,4.2vw,2.9rem);
+  font-weight:900;letter-spacing:.01em;margin-bottom:18px;
+}
+h1 .hl{
+  background:linear-gradient(transparent 62%,rgba(255,176,46,.55) 62%);
+  padding:0 2px;
+}
+.hero-lead{color:#c8d1e2;font-size:1.02rem;max-width:36em;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-weight:700;font-size:.96rem;
+  padding:12px 22px;border-radius:11px;
+  transition:.2s;border:1px solid transparent;
+}
+.btn-primary{background:var(--gold);color:#241a05;}
+.btn-primary:hover{background:#ffc457;transform:translateY(-1px);}
+.btn-ghost{background:rgba(255,255,255,.07);color:#e8edf7;border-color:rgba(255,255,255,.22);}
+.btn-ghost:hover{background:rgba(255,255,255,.14);}
+.hero-meta{
+  display:flex;gap:26px;flex-wrap:wrap;margin-top:30px;
+  padding-top:22px;border-top:1px solid rgba(255,255,255,.13);
+}
+.hero-meta div{font-size:.85rem;color:#a9b5ca;}
+.hero-meta strong{display:block;color:#fff;font-size:1.22rem;font-weight:800;line-height:1.4;}
+
+/* hero visual */
+.hero-art{
+  position:relative;
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.poster{
+  border-radius:14px;overflow:hidden;position:relative;
+  aspect-ratio:3/4;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 16px 34px rgba(0,0,0,.32);
+  background:#1d2a44;
+}
+.poster svg{width:100%;height:100%;}
+.poster .tag{
+  position:absolute;left:8px;bottom:8px;
+  font-size:.7rem;font-weight:700;
+  background:rgba(9,14,24,.8);
+  color:#ffd68a;padding:2px 8px;border-radius:6px;
+}
+.poster:nth-child(2){transform:translateY(20px);}
+.poster:nth-child(3){transform:translateY(-14px);}
+.art-badge{
+  position:absolute;right:-6px;top:-16px;
+  background:var(--teal);color:#04241f;
+  font-size:.74rem;font-weight:800;
+  padding:6px 12px;border-radius:999px;
+  box-shadow:0 8px 18px rgba(23,184,166,.35);
+}
+
+/* ---------- section shell ---------- */
+section{padding:56px 0;}
+.sec-head{max-width:44em;margin-bottom:30px;}
+.sec-kicker{
+  font-size:.78rem;font-weight:800;letter-spacing:.16em;
+  color:var(--teal);text-transform:uppercase;margin-bottom:8px;
+}
+.sec-head h2{font-size:clamp(1.35rem,2.6vw,1.75rem);font-weight:800;margin-bottom:10px;}
+.sec-head p{color:var(--muted);font-size:.96rem;margin:0;}
+
+/* ---------- features ---------- */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.feature{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:24px 22px;
+  box-shadow:var(--shadow);
+}
+.feature .ico{
+  width:42px;height:42px;border-radius:12px;
+  display:grid;place-items:center;margin-bottom:14px;
+  background:linear-gradient(140deg,#fff2d6,#ffe0a8);
+}
+.feature:nth-child(2) .ico{background:linear-gradient(140deg,#d9f7f2,#b3ece3);}
+.feature:nth-child(3) .ico{background:linear-gradient(140deg,#ffe0e6,#ffc9d4);}
+.feature h3{font-size:1.02rem;font-weight:800;margin-bottom:8px;}
+.feature p{font-size:.9rem;color:var(--muted);margin:0;}
+
+/* ---------- category ---------- */
+.cat-band{
+  background:var(--ink);color:#fff;border-radius:22px;
+  padding:34px;display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center;
+}
+.cat-band h2{font-size:clamp(1.3rem,2.4vw,1.6rem);margin-bottom:12px;}
+.cat-band p{color:#b6c1d4;font-size:.94rem;}
+.cats{display:flex;flex-wrap:wrap;gap:10px;}
+.cat-chip{
+  font-size:.86rem;font-weight:600;
+  padding:8px 15px;border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  color:#e5ebf6;
+}
+.cat-chip:hover{background:rgba(255,176,46,.18);border-color:rgba(255,176,46,.5);color:#ffd68a;}
+
+/* ---------- list / ranking ---------- */
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start;}
+.show-list{display:grid;gap:14px;}
+.show-item{
+  display:flex;gap:16px;align-items:center;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:14px 18px;
+  transition:.2s;
+}
+.show-item:hover{border-color:#c9c1b1;transform:translateX(3px);}
+.rank-no{
+  flex-shrink:0;width:30px;height:30px;border-radius:9px;
+  display:grid;place-items:center;font-weight:800;font-size:.88rem;
+  background:#f0ede5;color:#6b7280;
+}
+.show-item:nth-child(1) .rank-no{background:var(--gold);color:#2a1d00;}
+.show-item:nth-child(2) .rank-no{background:#dfe3ea;color:#3b4354;}
+.show-item:nth-child(3) .rank-no{background:#f2d9c2;color:#7a4a1d;}
+.show-item .txt{min-width:0;}
+.show-item h3{font-size:.98rem;font-weight:800;margin-bottom:3px;}
+.show-item p{font-size:.83rem;color:var(--muted);margin:0;}
+.show-item .type{
+  margin-left:auto;flex-shrink:0;
+  font-size:.75rem;font-weight:700;color:var(--teal);
+  background:#e6f8f5;padding:3px 10px;border-radius:999px;
+}
+
+.side-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);
+}
+.side-card h3{font-size:1.05rem;font-weight:800;margin-bottom:14px;}
+.steps{list-style:none;padding:0;margin:0;counter-reset:step;}
+.steps li{
+  counter-increment:step;position:relative;
+  padding-left:38px;margin-bottom:16px;font-size:.9rem;color:#3c4457;
+}
+.steps li::before{
+  content:counter(step);
+  position:absolute;left:0;top:1px;
+  width:24px;height:24px;border-radius:50%;
+  background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-size:.76rem;font-weight:800;
+}
+.steps li strong{color:var(--ink);}
+.side-note{
+  margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);
+  font-size:.82rem;color:var(--muted);
+}
+
+/* ---------- faq ---------- */
+.faq{display:grid;gap:14px;max-width:56em;}
+details{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:14px;padding:18px 22px;
+}
+details+details{margin-top:0;}
+summary{
+  cursor:pointer;font-weight:800;font-size:.98rem;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+}
+summary::-webkit-details-marker{display:none;}
+summary::after{
+  content:"+";font-size:1.25rem;font-weight:700;color:var(--teal);
+  transition:.2s;line-height:1;
+}
+details[open] summary::after{transform:rotate(45deg);}
+details p{margin:12px 0 0;font-size:.9rem;color:var(--muted);}
+
+/* ---------- download ---------- */
+.dl-band{
+  background:linear-gradient(135deg,#182642,#111a2b);
+  color:#fff;border-radius:22px;padding:38px;
+  display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between;
+}
+.dl-band h2{font-size:clamp(1.25rem,2.4vw,1.55rem);margin-bottom:8px;}
+.dl-band p{color:#b6c1d4;font-size:.92rem;margin:0;max-width:34em;}
+.btn-dl{
+  background:var(--gold);color:#241a05;
+  pointer-events:none;opacity:.92;
+}
+.btn-dl:hover{background:var(--gold);transform:none;}
+
+/* ---------- footer ---------- */
+.site-footer{
+  background:var(--ink);color:#9fabc0;
+  padding:40px 0 34px;margin-top:20px;font-size:.86rem;
+}
+.foot-top{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start;}
+.foot-brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:1rem;margin-bottom:12px;}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 22px;}
+.foot-links a:hover{color:var(--gold);}
+.foot-bottom{
+  margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:.8rem;color:#77839a;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:34px;}
+  .hero-art{max-width:420px;}
+  .feature-grid{grid-template-columns:1fr;}
+  .cat-band{grid-template-columns:1fr;padding:26px;}
+  .split{grid-template-columns:1fr;}
+  .dl-band{padding:28px;}
+}
+@media (max-width:620px){
+  .header-inner{flex-wrap:wrap;gap:6px;padding:10px 0;}
+  .nav{margin-left:0;width:100%;}
+  .nav a{padding:7px 10px;font-size:.85rem;}
+  .hero{padding:36px 0 44px;}
+  .hero-meta{gap:18px;}
+  .hero-meta strong{font-size:1.05rem;}
+  section{padding:40px 0;}
+  .poster .tag{font-size:.62rem;padding:2px 6px;}
+  .show-item{flex-wrap:wrap;}
+  .show-item .type{margin-left:46px;}
+  .btn{padding:11px 18px;font-size:.9rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="91短剧网页版 首页">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1b2740"/>
+        <path d="M24 18l24 14-24 14z" fill="#ffb02e"/>
+        <rect x="14" y="46" width="36" height="5" rx="2.5" fill="#40e0d0"/>
+      </svg>
+      <span class="brand-text">91短剧网页版</span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#why">网页版特点</a>
+      <a href="#types">短剧分类</a>
+      <a href="#ranking">热播排行</a>
+      <a href="#how">观看步骤</a>
+      <a href="#faq">常见问题</a>
+      <a class="cta" href="#start">立即进入</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" id="start">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span>浏览器直接打开 · 无需安装客户端</span>
+        <h1>91短剧网页版</h1>
+        <p class="hero-lead">把短剧放在浏览器里看。91短剧网页版围绕网页端观看场景组织剧集入口，打开页面即可按类型挑选，都市逆袭、甜宠情感、悬疑反转等常见短剧题材集中呈现，省去下载与注册的等待。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#ranking">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            浏览热播短剧
+          </a>
+          <a class="btn btn-ghost" href="#how">了解观看步骤</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>网页端</strong>免安装直接打开</div>
+          <div><strong>多题材</strong>按类型分区浏览</div>
+          <div><strong>短时长</strong>单集节奏紧凑</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="art-badge">热播中</span>
+        <div class="poster">
+          <svg viewBox="0 0 120 160" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="p1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b3d63"/><stop offset="1" stop-color="#111a2b"/></linearGradient></defs>
+            <rect width="120" height="160" fill="url(#p1)"/>
+            <circle cx="60" cy="58" r="24" fill="#ffb02e" opacity=".85"/>
+            <path d="M18 160c0-26 19-44 42-44s42 18 42 44z" fill="#40e0d0" opacity=".6"/>
+          </svg>
+          <span class="tag">都市逆袭</span>
+        </div>
+        <div class="poster">
+          <svg viewBox="0 0 120 160" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5c2b46"/><stop offset="1" stop-color="#1a1024"/></linearGradient></defs>
+            <rect width="120" height="160" fill="url(#p2)"/>
+            <path d="M60 34c16 0 26 13 26 30 0 20-26 52-26 52S34 84 34 64c0-17 10-30 26-30z" fill="#e8506b" opacity=".8"/>
+          </svg>
+          <span class="tag">甜宠情感</span>
+        </div>
+        <div class="poster">
+          <svg viewBox="0 0 120 160" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="p3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f4a45"/><stop offset="1" stop-color="#0e1a1c"/></linearGradient></defs>
+            <rect width="120" height="160" fill="url(#p3)"/>
+            <circle cx="60" cy="72" r="30" fill="none" stroke="#40e0d0" stroke-width="7" opacity=".8"/>
+            <rect x="52" y="66" width="16" height="12" rx="3" fill="#40e0d0"/>
+          </svg>
+          <span class="tag">悬疑反转</span>
+        </div>
+        <div class="poster">
+          <svg viewBox="0 0 120 160" preserveAspectRatio="xMidYMid slice">
+            <defs><linearGradient id="p4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a3a1c"/><stop offset="1" stop-color="#1c1710"/></linearGradient></defs>
+            <rect width="120" height="160" fill="url(#p4)"/>
+            <path d="M24 118l28-46 20 26 12-16 12 36z" fill="#ffb02e" opacity=".75"/>
+            <circle cx="86" cy="42" r="12" fill="#ffd68a" opacity=".9"/>
+          </svg>
+          <span class="tag">家庭年代</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">Why Web</div>
+        <h2>为什么选择网页版看短剧</h2>
+        <p>短剧单集时长短、节奏快，更适合随开随看。网页版把这一步压缩到打开一个页面，减少设备与账号上的前置操作。</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7a4a1d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+          </div>
+          <h3>无需安装客户端</h3>
+          <p>91短剧网页版在浏览器中运行，电脑、平板或手机的浏览器都能打开，不必额外占用存储空间。</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f6d62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
+          </div>
+          <h3>题材分区清楚</h3>
+          <p>按都市、逆袭、甜宠、悬疑、家庭等类型分区浏览，先看简介再决定从哪部开始，减少盲目翻找。</p>
+        </div>
+        <div class="feature">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a3304a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <h3>碎片时间友好</h3>
+          <p>单集时长通常较短，通勤、午休等间隙也能推进剧情，91短剧网页版适合按集追看而非整段投入。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES -->
+  <section id="types" style="padding-top:0;">
+    <div class="wrap">
+      <div class="cat-band">
+        <div>
+          <h2>按题材找到想看的短剧</h2>
+          <p>不同观众进站的第一诉求并不相同：有人想找爽感强的逆袭线，有人偏好情感向的甜宠线。91短剧网页版把常见题材拆开陈列，先用题材缩小范围，再看具体剧集。</p>
+        </div>
+        <div class="cats">
+          <a class="cat-chip" href="#ranking">都市逆袭</a>
+          <a class="cat-chip" href="#ranking">甜宠情感</a>
+          <a class="cat-chip" href="#ranking">悬疑反转</a>
+          <a class="cat-chip" href="#ranking">古装权谋</a>
+          <a class="cat-chip" href="#ranking">家庭年代</a>
+          <a class="cat-chip" href="#ranking">职场成长</a>
+          <a class="cat-chip" href="#ranking">校园青春</a>
+          <a class="cat-chip" href="#ranking">奇幻脑洞</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING + HOW -->
+  <section id="ranking">
+    <div class="wrap split">
+      <div>
+        <div class="sec-head">
+          <div class="sec-kicker">Hot List</div>
+          <h2>近期热播短剧速览</h2>
+          <p>以下为91短剧网页版入口页的题材示例，按常见热度排序陈列，简介仅用于说明类型与看点，便于快速判断是否合口味。</p>
+        </div>
+        <div class="show-list">
+          <a class="show-item" href="#start">
+            <span class="rank-no">1</span>
+            <div class="txt">
+              <h3>《逆风翻盘》</h3>
+              <p>低谷开局、层层反转，主角从被轻视到重新站稳，爽感集中在前中段。</p>
+            </div>
+            <span class="type">逆袭</span>
+          </a>
+          <a class="show-item" href="#start">
+            <span class="rank-no">2</span>
+            <div class="txt">
+              <h3>《心动合约》</h3>
+              <p>契约关系起步的情感线，节奏轻快，适合喜欢甜宠题材的观众连续追看。</p>
+            </div>
+            <span class="type">甜宠</span>
+          </a>
+          <a class="show-item" href="#start">
+            <span class="rank-no">3</span>
+            <div class="txt">
+              <h3>《第七个证人》</h3>
+              <p>以线索推进的悬疑短剧，每集结尾留有钩子，适合喜欢推理反转的观众。</p>
+            </div>
+            <span class="type">悬疑</span>
+          </a>
+          <a class="show-item" href="#start">
+            <span class="rank-no">4</span>
+            <div class="txt">
+              <h3>《长安旧局》</h3>
+              <p>古装权谋背景，人物关系密集，剧情以谋局与身份揭秘为主线展开。</p>
+            </div>
+            <span class="type">古装</span>
+          </a>
+          <a class="show-item" href="#start">
+            <span class="rank-no">5</span>
+            <div class="txt">
+              <h3>《老屋灯火》</h3>
+              <p>家庭年代题材，围绕一家人几十年的选择与和解，情绪落点偏温情。</p>
+            </div>
+            <span class="type">家庭</span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="side-card" id="how">
+        <h3>网页版观看步骤</h3>
+        <ol class="steps">
+          <li><strong>打开页面</strong>：在浏览器地址栏进入91短剧网页版首页，无需先安装应用。</li>
+          <li><strong>选择题材</strong>：按都市、甜宠、悬疑等分区缩小范围，浏览剧集简介与看点标签。</li>
+          <li><strong>进入剧集</strong>：点击感兴趣的条目查看分集列表，从第一集或任意一集开始播放。</li>
+          <li><strong>继续追看</strong>：后续集数按顺序排列，回到同一入口即可接着上次的进度。</li>
+        </ol>
+        <div class="side-note">提示：网页端体验与网络状况、浏览器版本相关。若播放不流畅，可尝试更换浏览器或降低同时打开的标签页数量。</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="padding-top:0;">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-kicker">FAQ</div>
+        <h2>关于91短剧网页版的常见问题</h2>
+        <p>把访问者最常问的几点集中说明，避免在入口之间反复寻找答案。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>91短剧网页版需要下载安装吗？</summary>
+          <p>不需要。它面向浏览器访问，打开网页即可浏览剧集与分类，不必先安装客户端。设备存储空间紧张的观众可以优先考虑网页版。</p>
+        </details>
+        <details>
+          <summary>手机上能正常观看吗？</summary>
+          <p>手机浏览器同样可以打开91短剧网页版，页面会按屏幕宽度调整布局。建议使用较新版本的浏览器，并保持网络稳定，以获得更顺畅的播放体验。</p>
+        </details>
+        <details>
+          <summary>短剧一般多长时间一集？</summary>
+          <p>短剧的典型特征是单集时长较短、剧情推进快，多数作品在一两分钟内完成一个小钩子。具体时长因剧集而异，进入分集列表后即可看到实际集数与长度。</p>
+        </details>
+        <details>
+          <summary>找不到想看的题材怎么办？</summary>
+          <p>可以先在题材分区中浏览相近类型，例如在都市分区里寻找职场或逆袭线。91短剧网页版的分类会随剧集更新调整，建议收藏首页后隔段时间再回看。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="dl-band">
+        <div>
+          <h2>把91短剧网页版放到手边</h2>
+          <p>将首页加入浏览器书签，下次打开只需一步；也可以在桌面创建快捷方式，让网页版像应用一样出现在主屏。</p>
+        </div>
+        <a class="btn btn-dl" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1" role="button">下载</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#1b2740"/>
+            <path d="M24 18l24 14-24 14z" fill="#ffb02e"/>
+            <rect x="14" y="46" width="36" height="5" rx="2.5" fill="#40e0d0"/>
+          </svg>
+          91短剧网页版
+        </div>
+        <p style="max-width:32em;margin:0;">面向浏览器访问的短剧入口页，按题材整理剧集信息，帮助访问者用更短的时间找到想看的短剧。</p>
+      </div>
+      <div class="foot-links" aria-label="页尾导航">
+        <a href="#why">网页版特点</a>
+        <a href="#types">短剧分类</a>
+        <a href="#ranking">热播排行</a>
+        <a href="#how">观看步骤</a>
+        <a href="#faq">常见问题</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>内容为题材示例与使用说明，剧集信息以实际页面为准。</span>
+      <span>91短剧网页版 · 浏览器观看入口</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
